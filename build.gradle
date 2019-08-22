@@ -4,6 +4,15 @@ plugins {
     id 'java'
 }
 
+flyway {
+    url = 'jdbc:postgresql://localhost:5432/postgres'
+    user = 'postgres'
+    schemas = ['schema1']
+    placeholders = [
+            'keyABC': 'valueXYZ',
+            'otherplaceholder': 'value123']
+}
+
 group = 'com.vapasians'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'

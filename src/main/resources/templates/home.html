@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <title>Shopoholics by Vapasians</title>
+</head>
+<body>
+<div class="container">
+    <div class="container" style="background-color: aqua">
+        <h2>Shopoholics - Shop till you drop</h2>
+    </div>
+    <div style="background-color: cornflowerblue"><p style="float:right">Login</p></div>
+    <br><br>
+    <div th:each="key:${products}">
+    <h3 th:text = "${key.getKey()}"></h3>
+    <table class="table" border="2">
+        <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                Buy
+            </th>
+        </tr>
+        </thead>
+        <tr th:each="pr:${key.getValue()}">
+            <td th:text = "${pr.getProductName()}" width="30%">
+                Item1
+            </td>
+            <td th:text = "${pr.getPrice()}">
+                Item2
+            </td>
+            <td>
+                Item3
+            </td>
+            <td>
+                <button >Add to Cart</button>
+            </td>
+        </tr>
+    </table>
+
+
+
+</div>
+</div>
+</body>
+</html>

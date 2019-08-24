@@ -21,9 +21,8 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/")
-    public String showProductList(Model model,RedirectAttributes redirectAttributes,HttpSession session)
+    public String showProductList(Model model,HttpSession session)
     {
-        System.out.println(session.getAttribute("loggedInUser"));
         model.addAttribute("products",productService.findAll());
         return "home";
     }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
@@ -31,13 +30,10 @@ public class UserController {
 //    }
 
     @GetMapping("/login")
-    public ModelAndView showLoginPage(Model model,RedirectAttributes redirectAttributes, HttpSession session)
+    public ModelAndView showLoginPage(Model model, HttpSession session)
     {
-        if(session.getAttribute("loggedInUser") != null)
-        {
-            redirectAttributes.addFlashAttribute("loggedInUser",session.getAttribute("loggedInUser"));
+        if(isAnyLoggedInUserInSession(session))
             return new ModelAndView("redirect:/");
-        }
         model.addAttribute("user",new User());
         return new ModelAndView("/login");
     }
@@ -56,36 +52,45 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ModelAndView loginUser(@ModelAttribute("user") User user,RedirectAttributes redirectAttributes,HttpSession session) {
+    public ModelAndView loginUser(@ModelAttribute("user") User user, HttpSession session, Model model) {
         if(isAnyLoggedInUserInSession(session))
-        {
-            System.out.println("found loggedin user");
-            redirectAttributes.addFlashAttribute("loggedInUser",session.getAttribute("loggedInUser"));
             return new ModelAndView("redirect:/");
-        }
-        else
-        {
-            String usernameFromLoginForm = user.getLoginName();
-            String passwordFromLoginForm = user.getLoginPwd();
 
-            Optional<User> userExistsOrNull = userService.isUserValidByUsername(usernameFromLoginForm);
-            if(!userExistsOrNull.isPresent())
-                return new ModelAndView("login");
+        //Get data entered in login form
+        String usernameFromLoginForm = user.getLoginName();
+        String passwordFromLoginForm = user.getLoginPwd();
 
-            User validUser = userExistsOrNull.get();
-            if(!userService.isUserAuthenticated(validUser,passwordFromLoginForm))
-                return new ModelAndView("login");
-            else
-            {
-                session.setAttribute("loggedInUser",validUser);
-                redirectAttributes.addFlashAttribute("loggedInUser",validUser);
-                return new ModelAndView("redirect:/");
-                //return productController.showProductList(model,(User)session.getAttribute("loggedInUserThisController"));
-            }
+        //Redirect to login page if username does not exit
+        Optional<User> userExistsOrNull = userService.isUserValidByUsername(usernameFromLoginForm);
+        if(!userExistsOrNull.isPresent()) {
+            model.addAttribute("loginErrorMessage","Username does not exist!");
+            return new ModelAndView("login");
         }
+
+        //Redirect to login page if password entered in form and in user record do not match
+        User validUser = userExistsOrNull.get();
+        if(!userService.isUserAuthenticated(validUser,passwordFromLoginForm)) {
+            model.addAttribute("loginErrorMessage","Wrong Password!");
+            return new ModelAndView("login");
+        }
+
+        //login
+        return loginUserAndRedirectToHomePage(session,validUser);
     }
 
-    public boolean isAnyLoggedInUserInSession(HttpSession session)
+    private ModelAndView loginUserAndRedirectToHomePage(HttpSession session, User validUser)
+    {
+        storeAuthenticatedUserInSession(session,validUser);
+        return new ModelAndView("redirect:/");
+        //return productController.showProductList(model,(User)session.getAttribute("loggedInUserThisController"));
+    }
+
+    private void storeAuthenticatedUserInSession(HttpSession session, User validUser)
+    {
+        session.setAttribute("loggedInUser",validUser);
+    }
+
+    private boolean isAnyLoggedInUserInSession(HttpSession session)
     {
         return session.getAttribute("loggedInUser") != null;
     }

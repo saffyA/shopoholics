@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Shopoholics by Vapasians</title>
+</head>
+<body>
+<div class="container">
+    <table>
+        <td>
+            <img src="create-online-shopping-website.jpg"/>
+        </td>
+        <td>
+            <div style="text-align: center">
+                <h1 style="font-style: italic;font-size: 100px">Shopoholics</h1><br><br>
+                <h3 style="font-family: 'Comic Sans MS'">Shop till you drop!</h3>
+            </div>
+        </td>
+    </table>
+    <br><br>
+    <form class="form" th:action="@{/login}" th:object="${user}" method="POST">
+        <h2>Login</h2>
+        <table style="text-align: center">
+            <tr>
+                <td class="text">
+                    Username
+                </td>
+                <td>
+                    <input class="input" type="text" th:field="*{loginName}">
+                </td>
+            </tr>
+            <tr>
+                <td class="text">
+                    Password
+                </td>
+                <td>
+                    <input class="input" type="password" th:field="*{loginPwd}">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Get Addicted" class="btn-primary" style="border-radius: 10px">
+                </td>
+                <td>
+                    <a th:href="@{/signUp}" class="hyperlink">New to Shopoholics? Sign up Now!</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+
+</html>

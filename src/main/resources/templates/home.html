@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>Shopoholics by Vapasians</title>
 </head>
 <body>
 <div class="container">
-    <div class="container" style="background-color: aqua">
-        <h2>Shopoholics - Shop till you drop</h2>
+    <table>
+        <td>
+            <img src="create-online-shopping-website.jpg"/>
+        </td>
+        <td>
+            <div style="text-align: center">
+                <h1 style="font-style: italic;font-size: 100px">Shopoholics</h1><br><br>
+                <h3 style="font-family: 'Comic Sans MS'">Shop till you drop!</h3>
+            </div>
+        </td>
+    </table>
+    <div style="float:right">
+        <text th:if="${session.loggedInUser == null}">Welcome User!</text>
+        <text th:if="${session.loggedInUser != null}" th:text="'Welcome ' + ${session.loggedInUser.getUserName()} + '!'"></text>
+        <a th:unless="${session.loggedInUser}" th:href="@{/login}" class="hyperlink">Login</a>
+        <a th:unless="${session.loggedInUser}" th:href="@{/signUp}" class="hyperlink">Register</a>
     </div>
-    <div style="background-color: cornflowerblue"><p style="float:right">Login</p></div>
     <br><br>
     <div th:each="key:${products}">
     <h3 th:text = "${key.getKey()}"></h3>
@@ -53,9 +66,6 @@
             </td>
         </tr>
     </table>
-
-
-
 </div>
 </div>
 </body>

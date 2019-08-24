@@ -26,8 +26,33 @@
         </td>
     </table>
     <br><br>
-    <form class="form" th:action="@{/login}" th:object="${user}" method="POST">
-        <h2>Login</h2>
+    <h2>Login</h2>
+    <!--- Form with bootstrap validation --->
+    <form class="needs-validation" th:action="@{/login}" th:object="${user}" method="POST">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01">Username</label>
+                <input type="text" class="form-control" id="validationCustom01" th:field="*{loginName}" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01">Password</label>
+                <input type="password" class="form-control" id="validationCustom02" th:field="*{loginPwd}" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-sm" type="submit">Get Addicted</button>
+    </form>
+
+
+    <!--- Form without bootstrap validation --->
+    <!---<form class="form" th:action="@{/login}" th:object="${user}" method="POST">
         <table style="text-align: center">
             <tr>
                 <td class="text">
@@ -54,9 +79,30 @@
                 </td>
             </tr>
         </table>
-    </form>
+    </form>-->
 </div>
 
 </body>
+
+<!--- Login Form validation --->
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 </html>

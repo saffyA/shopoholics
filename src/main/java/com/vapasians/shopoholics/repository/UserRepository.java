@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query("from User where loginName=?1 and loginPwd=?2")
     Optional<User> findUserByLoginNameAndLoginPwd(String username, String password);
+
+    @Query("from User where loginName=?1")
+    Optional<User> findUserByLoginName(String username);
 }

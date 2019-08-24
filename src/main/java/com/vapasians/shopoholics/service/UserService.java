@@ -11,13 +11,18 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public Optional<User> authenticateUser(String username, String password)
+    public boolean isUserAuthenticated(User validUser, String passwordFromLoginForm)
     {
-        return userRepository.findUserByLoginNameAndLoginPwd(username,password);
+        return validUser.getLoginPwd().equals(passwordFromLoginForm);
     }
 
     public void saveUser(User user)
     {
         userRepository.save(user);
+    }
+
+    public Optional<User> isUserValidByUsername(String username)
+    {
+        return userRepository.findUserByLoginName(username);
     }
 }

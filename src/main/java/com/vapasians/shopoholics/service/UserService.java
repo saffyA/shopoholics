@@ -4,9 +4,11 @@ import com.vapasians.shopoholics.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.vapasians.shopoholics.model.User;
+import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
-@Component
+@Service
 public class UserService {
     @Autowired
     UserRepository userRepository;

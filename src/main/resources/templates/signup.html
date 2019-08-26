@@ -3,21 +3,65 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Signup</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Shopoholics by Vapasians</title>
 </head>
 
 <body>
+<div class="container">
+    <table>
+        <td>
+            <img src="create-online-shopping-website.jpg"/>
+        </td>
+        <td>
+            <div style="text-align: center">
+                <h1 style="font-style: italic;font-size: 100px">Shopoholics</h1><br><br>
+                <h3 style="font-family: 'Comic Sans MS'">Shop till you drop!</h3>
+            </div>
+        </td>
+    </table>
+    <br><br>
+    <h2>Sign Up</h2>
+    <br><br>
+    <form th:action="@{/saveuser}" th:object="${user}" method="POST">
+        <tr class="form-row">
+            <td width="50%"><label>Login Name</label></td>
+            <td><input type="text" th:field="*{loginName}" required data-th-maxlength="15"/></td>
+        </tr>
+        <br>
+        <tr class="form-row">
+            <td width="50%"><label>Login Password</label></td>
+            <td><input type="password" th:field="*{loginPwd}" required data-th-maxlength="15"/></td>
+        </tr>
+        <br>
+        <tr class="form-row">
+            <td width="50%"><label>User Name</label></td>
+            <td><input type="text" th:field="*{userName}" required data-th-maxlength="200"/></td>
+        </tr>
+        <br>
+        <tr class="form-row">
+            <td width="50%"><label>User Email</label></td>
+            <td><input type="text" th:field="*{userEmail}" required data-th-maxlength="20"/></td>
+        </tr>
+        <br>
+        <tr class="form-row">
+            <td width="50%"><label>User Phone</label></td>
+            <td><input type="text" th:field="*{userPhone}" required data-th-maxlength="15"/></td>
+        </tr>
+        <br>
+        <tr class="form-row">
+            <td width="50%"><label>User Address</label></td>
+            <td><input type="text" th:field="*{userAdd}" required data-th-maxlength="200"/></td>
+        </tr>
+        <br>
 
-    <form th:action="@{/signUp}" th:object="${user}" method="POST">
-        <label>Login Name</label><input type="text" th:field="*{loginName}" /><br>
-        <label>Login Pwd</label><input type="text" th:field="*{loginPwd}" /><br>
-        <label>User Name</label><input type="text" th:field="*{userName}" /><br>
-        <label>User Email</label><input type="text" th:field="*{userEmail}"/><br>
-        <label>User Phone</label><input type="text" th:field="*{userPhone}" /><br>
-        <label>User Address</label><input type="text" th:field="*{userAdd}" /><br>
+        <button class="btn btn-primary btn-sm" type="submit">Sign Up</button>
 
-        <input type="submit" value="Sign Up"/>
+        <!--<button type="button" th:href="@{/}">Cancel</button>
+        <button class="btn btn-primary btn-cn" type="submit">Cancel</button>
+        onclick="javascript:window.location='http://stackoverflow.com';"></button>
+       <input type="submit" value="Sign Up"/>-->
     </form>
-
+</div>
 </body>
 </html>

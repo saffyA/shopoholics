@@ -44,11 +44,11 @@ public class UserController {
         return "signup";
     }
 
-    @PostMapping("/saveUser")
+    @PostMapping("/saveuser")
     public String saveUser(User user)
     {
         userService.saveUser(user);
-        return "home";
+        return "login";
     }
 
     @PostMapping("/login")

@@ -39,9 +39,11 @@ public class UserController {
     }
 
     @GetMapping(value="/signUp")
-    public String signup(Model model){
+    public ModelAndView signup(Model model,HttpSession session){
+        if(isAnyLoggedInUserInSession(session))
+            return new ModelAndView("redirect:/");
         model.addAttribute("user",new User());
-        return "signup";
+        return new ModelAndView("signup");
     }
 
     @PostMapping("/saveuser")
@@ -80,11 +82,18 @@ public class UserController {
             return new ModelAndView("login");
         }
 
-        //login
-        return loginUserAndRedirectToHomePage(session,validUser);
+        //login and redirect to home page
+        return loginUser(session,validUser);
     }
 
-    private ModelAndView loginUserAndRedirectToHomePage(HttpSession session, User validUser)
+    @GetMapping("/logout")
+    public ModelAndView logoutUser(HttpSession session)
+    {
+        session.removeAttribute("loggedInUser");
+        return new ModelAndView("redirect:/");
+    }
+
+    private ModelAndView loginUser(HttpSession session, User validUser)
     {
         storeAuthenticatedUserInSession(session,validUser);
         return new ModelAndView("redirect:/");

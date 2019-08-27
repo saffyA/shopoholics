@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -16,19 +17,30 @@ public class ProductService {
     @Autowired
     private CategoryDao categoryDao;
 
-public HashMap<String , Set<Product>> findAll()
-{
-    HashMap<String, Set<Product> > map = new HashMap<>(  );
-    List<Category> categories = categoryDao.findAll();
-   for(Category category : categories)
-   {
+    @Autowired
+    private ProductDao productDao;
 
-       Set<Product> productSet = category.getProductSet();
-       map.put( category.getCategoryName(), productSet);
+    public HashMap<String , Set<Product>> findAll()
+    {
+        HashMap<String, Set<Product> > map = new HashMap<>();
+        List<Category> categories = categoryDao.findAll();
+       for(Category category : categories)
+       {
 
-   }
-   return map;
-}
+           Set<Product> productSet = category.getProductSet();
+           map.put( category.getCategoryName(), productSet);
 
+       }
+       return map;
+    }
 
+    public void markProductUnavailable(int pid) {
+        Optional<Product> productOrNull = productDao.findById(pid);
+        System.out.println(productOrNull.get());
+        if(productOrNull.isPresent())
+        {
+            productOrNull.get().setAvailable(false);
+            productDao.save(productOrNull.get());
+        }
+    }
 }

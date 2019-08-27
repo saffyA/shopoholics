@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Shopoholics by Vapasians</title>
+</head>
+<body>
+<div class="container">
+    <table>
+        <tr>
+            <td>
+                <img src="/create-online-shopping-website.jpg"/>
+            </td>
+            <td>
+                <div style="text-align: center">
+                    <h1 style="font-style: italic;font-size: 80px">Shopoholics</h1><br><br>
+                    <h3 style="font-family: 'Comic Sans MS'">Shop till you drop!</h3>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div style="float:right">
+        <text th:if="${session.loggedInUser != null}" th:text="'Welcome ' + ${session.loggedInUser.getUserName()} + '!'"></text>
+        <a th:if="${session.loggedInUser != null}" th:href="@{/logout}" class="hyperlink">Logout</a>
+    </div>
+    <br><br>
+    <div th:each="key:${products}">
+        <h3 th:text = "${key.getKey()}"></h3>
+        <table class="table" border="2">
+            <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Action
+                </th>
+
+            </tr>
+            </thead>
+            <tr th:each="pr:${key.getValue()}">
+                <td th:text = "${pr.getProductName()}" width="30%">
+                    Item1
+                </td>
+                <td th:text = "${pr.getPrice()}">
+                    Item2
+                </td>
+
+                <td th:text = "${pr.getQuantity()}" width="30%">
+                    Item3
+                </td>
+                <td>
+                    <form th:if="${pr.isAvailable()}" th:action="@{/admin/removeUnavailableProducts}" method="post">
+                        <input type="hidden" th:name="pid" th:value="${pr.getId()}"/>
+                       <button >Mark Unavailable</button>
+
+                    </form>
+
+                    <text th:unless="${pr.isAvailable()}">Marked Unavailable!</text>
+                </td>
+            </tr>
+        </table>
+</div>
+</body>
+</html>

@@ -23,6 +23,38 @@ public class Product {
     @Column(name = "price")
     private float price;
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @Column(name = "quantity")
+    private int quantity;
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    @Column(name = "available")
+    private boolean available;
+
+
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoryid" ,referencedColumnName = "categoryid" , insertable = false, updatable = false)
     private Category category;

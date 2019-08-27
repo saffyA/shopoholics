@@ -1,5 +1,6 @@
 package com.vapasians.shopoholics.model;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.annotation.Generated;
@@ -32,6 +33,17 @@ public class User{
 
     @Column(name="useradd")
     private String userAdd;
+
+    @Column(name="role")
+    private char role;
+
+    public char getRole() {
+        return role;
+    }
+
+    public void setRole(char role) {
+        this.role = role;
+    }
 
     public Integer getUserId() {
         return userId;

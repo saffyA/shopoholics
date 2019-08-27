@@ -32,16 +32,12 @@ public class UserController {
     @GetMapping("/login")
     public ModelAndView showLoginPage(Model model, HttpSession session)
     {
-        if(isAnyLoggedInUserInSession(session))
-            return new ModelAndView("redirect:/");
         model.addAttribute("user",new User());
         return new ModelAndView("/login");
     }
 
     @GetMapping(value="/signUp")
     public ModelAndView signup(Model model,HttpSession session){
-        if(isAnyLoggedInUserInSession(session))
-            return new ModelAndView("redirect:/");
         model.addAttribute("user",new User());
         return new ModelAndView("signup");
     }
@@ -61,9 +57,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ModelAndView loginUser(@ModelAttribute("user") User user, HttpSession session, Model model) {
-        if(isAnyLoggedInUserInSession(session))
-            return new ModelAndView("redirect:/");
-
         //Get data entered in login form
         String usernameFromLoginForm = user.getLoginName();
         String passwordFromLoginForm = user.getLoginPwd();
@@ -96,6 +89,8 @@ public class UserController {
     private ModelAndView loginUser(HttpSession session, User validUser)
     {
         storeAuthenticatedUserInSession(session,validUser);
+        if(validUser.getRole()=='A')
+            return new ModelAndView("redirect:/admin");
         return new ModelAndView("redirect:/");
         //return productController.showProductList(model,(User)session.getAttribute("loggedInUserThisController"));
     }

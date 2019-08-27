@@ -26,9 +26,16 @@
         </td>
     </table>
     <br><br>
-    <h2>Login</h2>
+    <h2>Login to Shopoholics</h2>
+    <br>
     <!--- Form with bootstrap validation --->
     <form class="needs-validation" th:action="@{/login}" th:object="${user}" method="POST">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary btn-sm" style="float:left;background: #007bff" onclick="loadCustomerForm();" type="button">Customer</button>
+                <button class="btn btn-primary btn-sm" style="float:right;background: lightcoral" onclick="loadAdminForm();" type="button">Admin</button>
+            </div>
+        </div>
         <div class="form-row">
             <div class="col-md-4 mb-3">
                 <label for="validationCustom01">Username</label>
@@ -51,9 +58,9 @@
             <label style="font-weight:lighter;color: lightcoral" th:if="${loginErrorMessage != null}" th:text="${loginErrorMessage}"></label>
         </div>
 
-        <button class="btn btn-primary btn-sm" type="submit">Get Addicted</button>
+        <button class="btn btn-primary btn-sm" type="submit" id="loginFormSubmitButton">Get Addicted</button>
     </form>
-    <a th:href="@{/signUp}" class="hyperlink">New to Shopoholics? Sign up Now!</a>
+    <a th:href="@{/signUp}" class="hyperlink" id="signUpLink">New to Shopoholics? Sign up Now!</a>
 
 
     <!--- Form without bootstrap validation --->
@@ -108,5 +115,17 @@
             });
         }, false);
     })();
+    function loadCustomerForm()
+    {
+            document.getElementById("loginFormSubmitButton").style.backgroundColor="#007bff";
+            document.getElementById("loginFormSubmitButton").style.border="#007bff";
+            document.getElementById("signUpLink").style.visibility="visible";
+    }
+    function loadAdminForm()
+    {
+        document.getElementById("loginFormSubmitButton").style.backgroundColor="lightcoral";
+        document.getElementById("loginFormSubmitButton").style.border="lightcoral";
+        document.getElementById("signUpLink").style.visibility="hidden";
+    }
 </script>
 </html>

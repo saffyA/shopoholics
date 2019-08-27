@@ -45,10 +45,16 @@ public class UserController {
     }
 
     @PostMapping("/saveuser")
-    public String saveUser(User user)
+    public ModelAndView saveUser(User user, Model model)
     {
+        Optional<User> userExistsOrNull=userService.isUserValidByUsername(user.getLoginName());
+        if(userExistsOrNull.isPresent())
+        {
+            model.addAttribute("loginErrorMessage","User with this username already exists");
+            return new ModelAndView("signup");
+        }
         userService.saveUser(user);
-        return "login";
+        return new ModelAndView("login");
     }
 
     @PostMapping("/login")

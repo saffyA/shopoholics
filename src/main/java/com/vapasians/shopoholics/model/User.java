@@ -2,10 +2,8 @@ package com.vapasians.shopoholics.model;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.annotation.Generated;
+import javax.persistence.*;
 import java.util.stream.Stream;
 
 @Entity
@@ -14,6 +12,7 @@ public class User{
 
     @Id
     @Column(name="userid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
     @Column(name="loginname")

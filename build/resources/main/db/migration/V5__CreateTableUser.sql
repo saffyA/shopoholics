@@ -1,0 +1,10 @@
+CREATE TABLE UserTable (
+    Userid serial primary key,
+    LoginName VARCHAR (15),
+    LOGINPWD VARCHAR (15),
+    USERNAME VARCHAR (200),
+    USEREMAIL VARCHAR (20),
+    USERPHONE VARCHAR (15),
+    USERADD VARCHAR (200),
+    TYPEADMIN bit
+);

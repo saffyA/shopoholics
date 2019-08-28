@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Shopoholics by Vapasians</title>
+</head>
+<body>
+<div class="container">
+    <table>
+        <tr>
+            <td>
+            <img src="create-online-shopping-website.jpg"/>
+        </td>
+        <td>
+            <div style="text-align: center">
+                <h1 style="font-style: italic;font-size: 80px">Shopoholics</h1><br><br>
+                <h3 style="font-family: 'Comic Sans MS'">Shop till you drop!</h3>
+            </div>
+        </td>
+        </tr>
+    </table>
+    <div style="float:right">
+        <text th:if="${session.loggedInUser == null}">Welcome User!</text>
+        <text th:if="${session.loggedInUser != null}" th:text="'Welcome ' + ${session.loggedInUser.getUserName()} + '!'"></text>
+        <a th:unless="${session.loggedInUser}" th:href="@{/login}" class="hyperlink">Login</a>
+        <a th:unless="${session.loggedInUser}" th:href="@{/signUp}" class="hyperlink">Register</a>
+        <a th:if="${session.loggedInUser != null}" th:href="@{/logout}" class="hyperlink">Logout</a>
+
+    </div>
+    <div style="float:right" th:if="${session.loggedInUser != null}"><img src="cart.png" height="75" width="75"/><span th:text="${count}"></span> </div>
+    <br><br>
+    <div th:each="key:${products}">
+    <h3 th:text = "${key.getKey()}"></h3>
+    <table class="table" border="2">
+        <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Image
+            </th>
+            <th th:if="${session.loggedInUser != null}">
+                Buy
+            </th>
+        </tr>
+        </thead>
+        <tr th:each="pr:${key.getValue()}">
+            <td th:text = "${pr.getProductName()}" width="30%">
+                Item1
+            </td>
+            <td th:text = "${pr.getPrice()}">
+                Item2
+            </td>
+            <td>
+                Item3
+            </td>
+            <td th:if="${session.loggedInUser != null}">
+                <form action="#" th:action="@{/addToCart}" method="post" th:if="${session.loggedInUser != null}">
+                    <input type="hidden" th:if="${session.loggedInUser != null}" th:value="${session.loggedInUser.getUserId()}" name="userId"/>
+                    <input type="hidden" th:if="${session.loggedInUser != null}" th:value="${pr.getId()}" name="productId"/>
+                    <button th:if="${!cartitems.contains(pr.getId())}">Add to Cart</button>
+                    <text th:unless="${!cartitems.contains(pr.getId())}">Added to Cart</text>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,2 @@
+INSERT INTO usertable(loginname,loginpwd,username,useremail,userphone,useradd,role) VALUES('admin1','!admin1','Admin 1','admin@shop',9867543467,'Gurgaon','A');
+INSERT INTO usertable(loginname,loginpwd,username,useremail,userphone,useradd,role) VALUES('admin2','!admin2','Admin 2','admin@shop',9867653467,'Gurgaon','A');

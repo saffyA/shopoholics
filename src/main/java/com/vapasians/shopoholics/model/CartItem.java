@@ -1,6 +1,7 @@
 package com.vapasians.shopoholics.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="cartitem")
@@ -16,6 +17,7 @@ public class CartItem {
     @Column(name = "productid")
     private int productId;
 
+
     public CartItem()
     {
 
@@ -25,6 +27,9 @@ public class CartItem {
         this.userId = userId;
         this.productId = productId;
     }
+
+
+
 
     public int getCartItemId() {
         return cartItemId;

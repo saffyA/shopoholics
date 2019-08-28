@@ -18,6 +18,8 @@ public class ProductService {
     @Autowired
     private ProductDao productDao;
 
+
+
     public HashMap<String , Set<Product>> findAll()
     {
         HashMap<String, Set<Product> > map = new HashMap<>();
@@ -30,6 +32,11 @@ public class ProductService {
 
        }
        return map;
+    }
+    public void saveProduct(Product product) {
+        product.setAvailable( true );
+        productDao.save( product );
+
     }
 
     public void markProductUnavailable(int pid) {

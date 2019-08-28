@@ -35,7 +35,8 @@
         <a th:if="${session.loggedInUser != null}" th:href="@{/logout}" class="hyperlink">Logout</a>
 
     </div>
-    <div style="float:right" th:if="${session.loggedInUser != null}"><img src="cart.png" height="75" width="75"/><span th:text="${count}"></span> </div>
+    <a th:if="${session.loggedInUser != null}" th:href="@{/viewcart}" class="hyperlink">
+    <div style="float:right" th:if="${session.loggedInUser != null}"><img src="cart.png" height="75" width="75"/><span th:text="${count}"></span> </div></a>
     <br><br>
     <div th:each="key:${products}">
     <h3 th:text = "${key.getKey()}"></h3>

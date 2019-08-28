@@ -26,14 +26,14 @@
     <form class="needs-validation" th:action="@{/saveuser}" th:object="${user}" method="POST">
         <tr> <td width="50%"><div class="form-row">
             <label style="font-weight:lighter;color: lightcoral" th:if="${loginErrorMessage != null}" th:text="${loginErrorMessage}"></label>
-        </div></></tr>
+        </div></td></tr>
         <tr class="form-row">
             <td width="20%"><label>User Name</label></td>
-            <td> width="30%"><input type="text" th:field="*{loginName}" required data-th-maxlength="15"/></td>
+            <td width="30%"><input type="text" th:field="*{loginName}" required data-th-maxlength="15"/></td>
         </tr>
         <br>
         <tr class="form-row">
-            <td> width="50%"><label>Login Password</label></td>
+            <td width="50%"><label>Login Password</label></td>
             <td><input type="password" th:field="*{loginPwd}" required data-th-maxlength="15"/></td>
         </tr>
         <br>

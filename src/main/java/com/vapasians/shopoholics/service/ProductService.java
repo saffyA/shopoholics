@@ -7,15 +7,13 @@ import com.vapasians.shopoholics.repository.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ProductService {
     @Autowired
     private CategoryDao categoryDao;
+
 
     @Autowired
     private ProductDao productDao;
@@ -43,4 +41,5 @@ public class ProductService {
             productDao.save(productOrNull.get());
         }
     }
+
 }

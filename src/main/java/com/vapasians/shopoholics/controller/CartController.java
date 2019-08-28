@@ -25,11 +25,19 @@ public class CartController {
         System.out.println("User Id :" +userId+" ProductId : "+productId);
         CartItem cartItem=new CartItem(userId,productId);
         cartService.saveCartItem(cartItem);
-        int n=cartService.getCartItemCount(session);
-        model.addAttribute("count",n);
+
+        //int count=cartService.getCartItemCount(session);
+
+       // model.addAttribute("count",count);
+//
 
         return new ModelAndView("redirect:/");
     }
+
+    /*@ModelAttribute("count")
+    public int getItemCount(HttpSession session){
+        return cartService.getCartItemCount(session);
+    }*/
 
     /*@RequestMapping(value="/cart/items/count", method= RequestMethod.GET)
     @ResponseBody

@@ -85,6 +85,7 @@ public class UserController {
     @GetMapping("/logout")
     public ModelAndView logoutUser(HttpSession session)
     {
+
         session.removeAttribute("loggedInUser");
         return new ModelAndView("redirect:/");
     }

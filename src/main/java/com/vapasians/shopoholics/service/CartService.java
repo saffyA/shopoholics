@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.sql.ClientInfoStatus;
 import java.util.*;
 
 import java.util.stream.Collectors;
@@ -61,4 +62,14 @@ public class CartService {
         }
         return products;
     }
+
+    public void removeProductFromCart(HttpSession session, int ProductId)
+    {
+        //System.out.println(ProductId);
+        List<CartItem> c= cartItemDao.findCartItemByUserId(((User)session.getAttribute("loggedInUser")).getUserId()).stream().filter(CartItem->CartItem.getProductId()==ProductId).collect(Collectors.toList());
+        System.out.println(String.valueOf(c.get(0).getCartItemId()));
+        cartItemDao.delete((CartItem) c.get(0));
+
+    }
+
 }

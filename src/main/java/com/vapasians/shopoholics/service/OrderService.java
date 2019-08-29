@@ -36,7 +36,7 @@ public class OrderService {
     {
         OrderMaster orderMaster=new OrderMaster();
         orderMaster.setUserId(userId);
-        orderMaster.setOrderDate(new Date());
+        //orderMaster.setOrderDate(new Date());
         System.out.println("Order Id  :" +orderMaster.getOrderId()+" UserId : "+ orderMaster.getUserId()+" Date : "+orderMaster.getOrderDate());
         orderMasterDao.save(orderMaster);
 

@@ -34,6 +34,14 @@ public class UserController {
         return new ModelAndView("/login");
     }
 
+//    @GetMapping("/")
+//    public ModelAndView showLoginPage(Model model, HttpSession session)
+//    {
+//        model.addAttribute("user",new User());
+//        return new ModelAndView("/login");
+//    }
+
+
     @GetMapping(value="/signUp")
     public ModelAndView signup(Model model,HttpSession session){
         model.addAttribute("user",new User());

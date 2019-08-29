@@ -44,6 +44,27 @@ public class CartController {
         return new ModelAndView("redirect:/login");
     }
 
+
+
+    @PostMapping("/cartsubmit")
+    public ModelAndView cartsubmit(@RequestParam("action") String action, @RequestParam("productId") int  productId, HttpSession session)
+    {
+        System.out.println(action +"nnnn");
+        switch (action) {
+            case "remove":
+                //System.out.println(String.valueOf(productId));
+                cartService.removeProductFromCart(session,productId);
+                return new ModelAndView("redirect:/viewcart");
+            case "checkout":
+                System.out.println(action +"nnnn");
+                return new ModelAndView("redirect:/checkout");
+            default:
+                return new ModelAndView(":/viewcart");
+
+        }
+
+    }
+
     @PostMapping("/checkout")
     public ModelAndView getOrderDetails(HttpSession session,Model model)
     {

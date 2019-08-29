@@ -31,21 +31,24 @@ public class CartService {
 
     public List<Integer> getCartItems(HttpSession session)
     {
-
-      List<Integer> list= cartItemDao.findCartItemByUserId(((User)session.getAttribute("loggedInUser")).getUserId()).stream().map(CartItem::getProductId).collect(Collectors.toList());
-      //for(int n:list)
-        //  System.out.println(n);
+      List<Integer> list=getCartItemObjects(session).stream().map(CartItem::getProductId).collect(Collectors.toList());
       return list;
+    }
+
+    public List<CartItem> getCartItemObjects(HttpSession session)
+    {
+
+        List<CartItem> list= cartItemDao.findCartItemByUserId(((User)session.getAttribute("loggedInUser")).getUserId());
+
+        return list;
 
     }
 
     public int getCartItemCount(HttpSession session)
     {
-        List<CartItem> items=cartItemDao.findCartItemByUserId(((User)session.getAttribute("loggedInUser")).getUserId());
 
-        return items.size();
+        return getCartItemObjects(session).size();
     }
-
 
 
 

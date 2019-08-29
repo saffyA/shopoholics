@@ -2,13 +2,14 @@ package com.vapasians.shopoholics.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
-@Table(name="OrderMaster")
+@Table(name="ordermaster")
 public class OrderMaster {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="orderid")
     private int orderId;
 
@@ -16,11 +17,11 @@ public class OrderMaster {
     private int userId;
 
     @Column(name="orderdate")
-    LocalDate orderDate;
+    Date orderDate;
 
     public OrderMaster(){}
 
-    public OrderMaster(int userId, LocalDate orderDate) {
+    public OrderMaster(int userId, Date orderDate) {
         this.userId = userId;
         this.orderDate = orderDate;
     }
@@ -41,11 +42,11 @@ public class OrderMaster {
         this.userId = userId;
     }
 
-    public LocalDate getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 }

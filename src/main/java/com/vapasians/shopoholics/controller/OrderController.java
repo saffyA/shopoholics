@@ -16,7 +16,7 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @GetMapping("/placeOrder")
+    @PostMapping("/placeOrder")
     public String placeOrder(HttpSession session, Model model) {
         if (session.getAttribute("loggedInUser") == null)
             return "home";
@@ -24,12 +24,6 @@ public class OrderController {
         int orderId;
         orderId = orderService.placeFinalOrder(((User) session.getAttribute("loggedInUser")).getUserId(),session);
         model.addAttribute("orderid", orderId);
-
-
-
-        System.out.println("Order Id : "+orderId);
         return "orderconfirmation";
-
-
     }
 }

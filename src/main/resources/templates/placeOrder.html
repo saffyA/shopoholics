@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Shopoholics by Vapasians</title>
+</head>
+<body>
+<div class="container">
+    <table>
+        <tr>
+            <td>
+                <a th:href="@{/}"><img src="create-online-shopping-website.jpg"/></a>
+            </td>
+            <td>
+                <div style="text-align: center">
+                    <h1 style="font-style: italic;font-size: 80px">Shopoholics</h1><br><br>
+                    <h3 style="font-family: 'Comic Sans MS'">Shop till you drop!</h3>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div style="float:right">
+        <text th:if="${session.loggedInUser == null}">Welcome User!</text>
+        <text th:if="${session.loggedInUser != null}" th:text="'Welcome ' + ${session.loggedInUser.getUserName()} + '!'"></text>
+        <a th:unless="${session.loggedInUser}" th:href="@{/login}" class="hyperlink">Login</a>
+        <a th:unless="${session.loggedInUser}" th:href="@{/signUp}" class="hyperlink">Register</a>
+        <a th:if="${session.loggedInUser != null}" th:href="@{/logout}" class="hyperlink">Logout</a>
+    </div>
+    <br/><br/>
+    <h3>Please provide Order Details</h3>
+    <br/>
+    <form class="needs-validation" th:action="@{/placeOrder}" method="POST">
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="validationCustom01" style="font-weight: bold">Address you would like your order shipped to?</label>
+                <input type="textarea" class="form-control" rows="15" cols="15" id="validationCustom01" name="shippingAddress" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label class="form-check-label" style="font-weight: bold">How would you like to pay for your order?</label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="paymentOption" checked>Cash on Delivery
+                </label>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-sm" type="submit" id="loginFormSubmitButton">Confirm My Order!</button>
+    </form>
+</div>
+</body>
+</html>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

@@ -17,7 +17,7 @@
     <table>
         <tr>
             <td>
-                <img src="create-online-shopping-website.jpg"/>
+                <a th:href="@{/}"><img src="create-online-shopping-website.jpg"/></a>
             </td>
             <td>
                 <div style="text-align: center">
@@ -39,9 +39,13 @@
     <br><br>
 
     <div id="container">
-        <h4> Thank you for shopping with Shopoholics. Your Order id is</h4> <text th:text="${orderid}"></text>
+        <h4> Thank you for choosing Shopoholics! We will email you shipping details shortly.</h4>
+        <br>
+        <div class="alert alert-info">
+            <strong>Success!</strong><text th:text="'  Your order ID is : ' + ${orderid}">Your order was placed!</text>
+        </div>
+        <br>
+        <a th:href="@{/}">More products!</a>
     </div>
-
-</div>
 </body>
 </html>

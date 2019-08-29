@@ -60,4 +60,10 @@ public class CartController {
 
     }*/
 
+    @PostMapping("/checkout")
+    public String getOrderDetails()
+    {
+        return "placeOrder";
+    }
+
 }

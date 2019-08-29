@@ -3,11 +3,11 @@ package com.vapasians.shopoholics.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="OrderDetail")
+@Table(name="orderdetail")
 public class OrderDetail {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="orderdetailid")
     private int orderDetailId;
 

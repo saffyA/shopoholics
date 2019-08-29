@@ -13,6 +13,7 @@
     <title>Shopoholics by Vapasians</title>
 </head>
 <body>
+<div class="container">
 <table>
     <tr>
         <td>
@@ -26,7 +27,6 @@
         </td>
     </tr>
 </table>
-<div class="container">
 <div style="float:right">
     <text th:if="${session.loggedInUser == null}">Welcome User!</text>
     <text th:if="${session.loggedInUser != null}" th:text="'Welcome ' + ${session.loggedInUser.getUserName()} + '!'"></text>

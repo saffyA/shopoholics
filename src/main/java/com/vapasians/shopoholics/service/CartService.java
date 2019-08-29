@@ -1,7 +1,6 @@
 package com.vapasians.shopoholics.service;
 
 import com.vapasians.shopoholics.model.CartItem;
-import com.vapasians.shopoholics.model.Category;
 import com.vapasians.shopoholics.model.Product;
 import com.vapasians.shopoholics.model.User;
 import com.vapasians.shopoholics.repository.CartItemDao;
@@ -32,6 +31,9 @@ public class CartService {
     public List<Integer> getCartItems(HttpSession session)
     {
       List<Integer> list=getCartItemObjects(session).stream().map(CartItem::getProductId).collect(Collectors.toList());
+      //List<Integer> list= cartItemDao.findCartItemByUserId(((User)session.getAttribute("loggedInUser")).getUserId()).stream().map(CartItem::getProductId).collect(Collectors.toList());
+      //for(int n:list)
+        //  System.out.println(n);
       return list;
     }
 
@@ -39,18 +41,14 @@ public class CartService {
     {
 
         List<CartItem> list= cartItemDao.findCartItemByUserId(((User)session.getAttribute("loggedInUser")).getUserId());
-
         return list;
 
     }
 
     public int getCartItemCount(HttpSession session)
     {
-
         return getCartItemObjects(session).size();
     }
-
-
 
     public List<Product> getCartItemProduct(HttpSession session)
     {
@@ -63,5 +61,4 @@ public class CartService {
         }
         return products;
     }
-
 }

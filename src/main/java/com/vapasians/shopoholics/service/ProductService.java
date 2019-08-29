@@ -49,6 +49,8 @@ public class ProductService {
         }
     }
 
-
-
+    public float getPriceOfProducts(List<Product> productsInUserCart) {
+        float totalPrice = productsInUserCart.stream().map(product -> product.getPrice()).reduce((float)0,(a,b) -> a+b);
+        return totalPrice;
+    }
 }

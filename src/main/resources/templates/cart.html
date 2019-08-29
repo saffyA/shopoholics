@@ -36,7 +36,12 @@
 <br><br>
 <h2>Cart</h2>
 <br>
-<form th:action="@{/checkout}" th:object="${products}" method="POST">
+<div th:if="${products.size()==0}">
+    <div class="alert alert-info">
+        <text>You do not have items in your cart!</text><a th:href="@{/}" style="margin-left: 10px">Browse our collection here!</a>
+    </div>
+</div>
+<form th:action="@{/checkout}" th:object="${products}" method="POST" th:if="${products.size() > 0}">
 
 
         <table class="table" border="2">

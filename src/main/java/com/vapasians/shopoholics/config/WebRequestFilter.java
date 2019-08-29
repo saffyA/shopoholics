@@ -35,7 +35,7 @@ public class WebRequestFilter implements Filter {
         }
         else
         {
-            if(url.contains("/admin") || url.contains("/checkout") || url.contains("/placeOrder") || url.contains("cart")) {
+            if(url.contains("/admin") || url.contains("/checkout")) {
                 System.out.println("url starts with admin - not allowed as guest");
                     ((HttpServletResponse)response).sendRedirect("/login");
             }

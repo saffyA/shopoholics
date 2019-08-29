@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
@@ -34,7 +37,11 @@
         <a th:unless="${session.loggedInUser}" th:href="@{/signUp}" class="hyperlink">Register</a>
         <a th:if="${session.loggedInUser != null}" th:href="@{/logout}" class="hyperlink">Logout</a>
     </div>
-    <br/><br/>
+    <br/>
+    <div class="alert alert-info">
+        <text>Your order total is</text><i style="font-size:20px;margin-left: 10px" class="fa">&#xf156;</i><text th:text="${orderTotal}"></text>
+    </div>
+    <br/>
     <h3>Please provide Order Details</h3>
     <br/>
     <form class="needs-validation" th:action="@{/placeOrder}" method="POST">

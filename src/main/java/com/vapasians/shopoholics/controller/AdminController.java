@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
@@ -50,10 +51,13 @@ public class AdminController {
     }
 
     @PostMapping("/admin/addproducts")
-    public ModelAndView saveProduct(@ModelAttribute("product") Product product, Model model)
+    public String saveProduct(@ModelAttribute("product") Product product, Model model)
     {
         System.out.println(" Product name  -------" + product.getProductName());
         productService.saveProduct(product);
-        return new ModelAndView("redirect:/admin");
+        model.addAttribute( "successMessage","Added product successfully" );
+        return addProducts( model );
+
     }
+    
 }

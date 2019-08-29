@@ -23,6 +23,7 @@ public class Category {
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "category" , cascade = CascadeType.ALL)
+    @OrderBy("productName ASC")
     private Set<Product> productSet;
 
     public Category(){}

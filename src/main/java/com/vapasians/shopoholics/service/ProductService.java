@@ -23,7 +23,7 @@ public class ProductService {
     public HashMap<String , Set<Product>> findAll()
     {
         HashMap<String, Set<Product> > map = new HashMap<>();
-        List<Category> categories = categoryDao.findAll();
+        List<Category> categories = categoryDao.findAllByOrderByCategoryIdAsc();
        for(Category category : categories)
        {
 

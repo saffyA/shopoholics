@@ -16,7 +16,7 @@
 <div class="container">
     <table>
         <td>
-            <img src="create-online-shopping-website.jpg"/>
+            <a th:href="@{/}"><img src="create-online-shopping-website.jpg"/></a>
         </td>
         <td>
             <div style="text-align: center">
@@ -120,12 +120,14 @@
             document.getElementById("loginFormSubmitButton").style.backgroundColor="#007bff";
             document.getElementById("loginFormSubmitButton").style.border="#007bff";
             document.getElementById("signUpLink").style.visibility="visible";
+            document.getElementById("loginFormSubmitButton").innerText="Get Addicted";
     }
     function loadAdminForm()
     {
         document.getElementById("loginFormSubmitButton").style.backgroundColor="lightcoral";
         document.getElementById("loginFormSubmitButton").style.border="lightcoral";
         document.getElementById("signUpLink").style.visibility="hidden";
+        document.getElementById("loginFormSubmitButton").innerText="Stock Up";
     }
 </script>
 </html>
